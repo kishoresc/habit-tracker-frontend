@@ -1,0 +1,55 @@
+.notification-prompt {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 400px;
+}
+
+.notification-content {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: var(--shadow-lg);
+  border-left: 4px solid var(--primary-color);
+}
+
+.notification-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.notification-text h3 {
+  color: var(--dark-text);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.notification-text p {
+  color: var(--gray-text);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.notification-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.notification-actions button {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .notification-prompt {
+    left: 20px;
+    right: 20px;
+    max-width: none;
+  }
+
+  .notification-actions {
+    flex-direction: column;
+  }
+}

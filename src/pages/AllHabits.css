@@ -1,0 +1,100 @@
+/* AllHabits Content Wrapper - Modern & Spacious */
+.allhabits-content {
+  padding: 32px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  min-height: 100%;
+}
+
+.habits-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  background: white;
+  padding: 6px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.filter-tab {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: var(--gray-600);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  font-weight: 700;
+  transition: var(--transition);
+  font-size: 13px;
+  position: relative;
+}
+
+.filter-tab:hover {
+  background: var(--gray-100);
+  color: var(--gray-900);
+  transform: translateY(-1px);
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+  transform: translateY(-1px);
+}
+
+.filter-tab.active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  border-radius: var(--radius-xl);
+  pointer-events: none;
+}
+
+.habits-grid {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .allhabits-content {
+    padding: 24px;
+  }
+
+  .habits-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-tabs {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .filter-tab {
+    white-space: nowrap;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .habits-grid {
+    padding: 24px 20px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .filter-tabs {
+    overflow-x: auto;
+  }
+}
