@@ -28,6 +28,33 @@
   align-items: center;
   gap: 10px;
   min-height: 60px;
+  position: relative;
+}
+
+.admin-sidebar-close-btn {
+  display: none !important;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+.admin-sidebar-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) rotate(90deg);
 }
 
 .admin-sidebar-logo {
@@ -240,6 +267,20 @@
 
   .admin-sidebar.collapsed {
     transform: translateX(-100%);
+  }
+  
+  /* Show close button on mobile */
+  .admin-sidebar-close-btn {
+    display: flex !important;
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    right: 12px;
+  }
+  
+  /* Auto-close sidebar when clicking nav items on mobile */
+  .admin-nav-item {
+    cursor: pointer;
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { FaCog, FaSignOutAlt, FaChartBar } from 'react-icons/fa';
@@ -7,6 +7,17 @@ import './AdminSidebar.css';
 const AdminSidebar = ({ isOpen, toggleSidebar }) => {
   const { logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -21,6 +32,11 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
           <>
             <div className="admin-sidebar-logo">👑</div>
             <h2 className="admin-sidebar-title">Master Admin</h2>
+            {isMobile && (
+              <button className="admin-sidebar-close-btn" onClick={toggleSidebar}>
+                ✕
+              </button>
+            )}
           </>
         )}
         {!isOpen && <div className="admin-sidebar-logo-small">👑</div>}
@@ -28,14 +44,14 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
 
       {/* Navigation */}
       <nav className="admin-sidebar-nav">
-        <NavLink to="/admin" className="admin-nav-item" title="Admin Dashboard" end>
+        <NavLink to="/admin" className="admin-nav-item" title="Admin Dashboard" onClick={isMobile ? toggleSidebar : undefined} end>
           <div className="admin-nav-icon">
             <FaChartBar />
           </div>
           {isOpen && <span className="admin-nav-text">Dashboard</span>}
         </NavLink>
 
-        <NavLink to="/admin/smtp" className="admin-nav-item" title="SMTP Settings">
+        <NavLink to="/admin/smtp" className="admin-nav-item" title="SMTP Settings" onClick={isMobile ? toggleSidebar : undefined}>
           <div className="admin-nav-icon">
             <FaCog />
           </div>
