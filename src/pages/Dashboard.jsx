@@ -129,20 +129,9 @@ const Dashboard = ({ toggleSidebar, sidebarOpen }) => {
         <div className="today-progress-section fade-in">
           
           {/* Stats Cards */}
-          <div style={{ 
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '25px',
-            marginBottom: '30px'
-          }}>
+          <div className="dashboard-stats-grid">
             {/* Total Habits Created */}
-            <div style={{
-              background: 'white',
-              borderRadius: '20px',
-              padding: '30px',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
-              textAlign: 'center'
-            }}>
+            <div className="dashboard-stat-card">
               <div style={{ fontSize: '48px', marginBottom: '15px' }}>📝</div>
               <div style={{ fontSize: '48px', fontWeight: '700', color: '#667eea', marginBottom: '10px' }}>
                 {habits.length}
@@ -153,13 +142,7 @@ const Dashboard = ({ toggleSidebar, sidebarOpen }) => {
             </div>
 
             {/* Active Streaks */}
-            <div style={{
-              background: 'white',
-              borderRadius: '20px',
-              padding: '30px',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
-              textAlign: 'center'
-            }}>
+            <div className="dashboard-stat-card">
               <div style={{ fontSize: '48px', marginBottom: '15px' }}>🔥</div>
               <div style={{ fontSize: '48px', fontWeight: '700', color: '#f59e0b', marginBottom: '10px' }}>
                 {habits.filter(h => h.currentStreak > 0).length}
@@ -170,13 +153,7 @@ const Dashboard = ({ toggleSidebar, sidebarOpen }) => {
             </div>
 
             {/* Best Streak */}
-            <div style={{
-              background: 'white',
-              borderRadius: '20px',
-              padding: '30px',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
-              textAlign: 'center'
-            }}>
+            <div className="dashboard-stat-card">
               <div style={{ fontSize: '48px', marginBottom: '15px' }}>⭐</div>
               <div style={{ fontSize: '48px', fontWeight: '700', color: '#10b981', marginBottom: '10px' }}>
                 {topStreakHabit?.currentStreak || 0}

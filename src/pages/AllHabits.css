@@ -65,35 +65,77 @@
   padding: 32px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.8);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .allhabits-content {
-    padding: 24px;
+    padding: 20px 16px;
+    margin-left: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  
+  .allhabits-content > * {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .habits-header {
     flex-direction: column;
     align-items: stretch;
+    margin-bottom: 20px;
+    gap: 16px;
   }
 
   .filter-tabs {
     width: 100%;
     overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .filter-tab {
     white-space: nowrap;
-    padding: 8px 16px;
+    padding: 10px 16px;
     font-size: 13px;
+    flex-shrink: 0;
   }
 
   .habits-grid {
-    padding: 24px 20px;
+    padding: 20px 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .allhabits-content {
+    padding: 16px 12px;
+  }
+  
+  .filter-tab {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  
+  .habits-grid {
+    padding: 16px 12px;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
+  .allhabits-content {
+    padding: 28px 24px;
+  }
+  
   .filter-tabs {
     overflow-x: auto;
   }

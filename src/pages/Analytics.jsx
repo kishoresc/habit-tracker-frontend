@@ -997,8 +997,8 @@ const Analytics = ({ toggleSidebar, sidebarOpen }) => {
                     <h4>{habit.name}</h4>
                     <span className="habit-category">{habit.category}</span>
                   </div>
-                  <div className="streak-badge">
-                    🔥 {habit.filteredStreak || 0}
+                  <div className="streak-badge" style={{ display: 'inline-flex' }}>
+                    🔥 {habit.filteredStreak !== undefined ? habit.filteredStreak : 0}
                   </div>
                 </div>
               )) : (
@@ -1022,8 +1022,8 @@ const Analytics = ({ toggleSidebar, sidebarOpen }) => {
                     <h4>{habit.name}</h4>
                     <span className="habit-category">{habit.category}</span>
                   </div>
-                  <div className="streak-badge gold">
-                    🏆 {habit.filteredLongestStreak || 0}
+                  <div className="streak-badge gold" style={{ display: 'inline-flex' }}>
+                    🏆 {habit.filteredLongestStreak !== undefined ? habit.filteredLongestStreak : 0}
                   </div>
                 </div>
               )) : (

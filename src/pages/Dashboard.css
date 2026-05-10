@@ -82,6 +82,23 @@
   margin-bottom: 32px;
 }
 
+/* Dashboard Stats Grid */
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.dashboard-stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  text-align: center;
+  box-sizing: border-box;
+}
+
 .progress-circle-card {
   background: white;
   border-radius: var(--radius-xl);
@@ -156,6 +173,7 @@
 /* Quick Stats Grid - Spacious & Colorful */
 .quick-stats-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
@@ -492,78 +510,298 @@
   .progress-percentage {
     font-size: 42px;
   }
+  
+  .quick-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
   .dashboard-content {
-    padding: 24px;
+    padding: 12px 8px;
+    margin-left: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  
+  /* Force all child elements to respect container width */
+  .dashboard-content > * {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .dashboard-welcome {
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 12px;
   }
 
   .welcome-text h1 {
-    font-size: 24px;
+    font-size: 18px;
   }
 
   .welcome-text p {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .btn-add-habit {
     width: 100%;
     justify-content: center;
+    padding: 10px 16px;
+    font-size: 12px;
   }
 
   .today-progress-section {
-    gap: 20px;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  /* Dashboard Stats Grid - Mobile */
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .dashboard-stat-card {
+    padding: 16px 12px;
+  }
+  
+  .dashboard-stat-card > div:first-child {
+    font-size: 32px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .dashboard-stat-card > div:nth-child(2) {
+    font-size: 28px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .dashboard-stat-card > div:last-child {
+    font-size: 12px !important;
   }
 
   .progress-circle-card {
-    padding: 32px 24px;
+    padding: 20px 12px;
   }
 
   .progress-circle-container {
-    width: 200px;
-    height: 200px;
+    width: 140px;
+    height: 140px;
   }
 
   .progress-percentage {
-    font-size: 40px;
+    font-size: 28px;
+  }
+  
+  .progress-label {
+    font-size: 10px;
+  }
+  
+  .progress-count {
+    font-size: 12px;
+  }
+
+  .quick-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .quick-stat-card {
-    padding: 24px;
+    padding: 14px 12px;
   }
 
   .stat-icon {
-    width: 56px;
-    height: 56px;
-    font-size: 28px;
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
   }
 
   .stat-value {
-    font-size: 32px;
+    font-size: 22px;
+  }
+  
+  .stat-label {
+    font-size: 11px;
+  }
+
+  /* Pie Chart Section - Mobile */
+  .today-progress-section > div:last-child {
+    padding: 20px 12px !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  .today-progress-section > div:last-child h2 {
+    font-size: 16px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .today-progress-section > div:last-child > div {
+    flex-direction: column !important;
+    gap: 30px !important;
+    align-items: center !important;
+  }
+  
+  .today-progress-section svg {
+    max-width: 200px !important;
+    max-height: 200px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Legend items on mobile */
+  .today-progress-section > div:last-child > div > div:last-child {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .today-progress-section > div:last-child > div > div:last-child > div {
+    width: 100%;
   }
 
   .today-habits-section {
-    padding: 24px 20px;
+    padding: 14px 10px;
+    margin-bottom: 16px;
   }
 
   .section-header-dashboard {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  
+  .section-header-dashboard h2 {
+    font-size: 16px;
   }
 
   .btn-view-all {
     width: 100%;
     justify-content: center;
+    font-size: 12px;
+    padding: 8px 14px;
   }
 
   .quick-actions-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .quick-action-card {
+    padding: 16px 12px;
+  }
+  
+  .action-icon {
+    font-size: 32px;
+  }
+  
+  .quick-action-card h3 {
+    font-size: 14px;
+  }
+  
+  .quick-action-card p {
+    font-size: 11px;
+  }
+  
+  .habit-quick-item {
+    padding: 12px 10px;
+  }
+  
+  .habit-quick-info h4 {
+    font-size: 13px;
+  }
+  
+  .habit-quick-meta {
+    gap: 6px;
+  }
+  
+  .habit-category-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+  
+  .habit-streak-badge {
+    font-size: 12px;
+  }
+}
+
+/* Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .dashboard-content {
+    padding: 10px 6px;
+  }
+  
+  .welcome-text h1 {
+    font-size: 16px;
+  }
+  
+  .welcome-text p {
+    font-size: 11px;
+  }
+  
+  .dashboard-stat-card {
+    padding: 14px 10px;
+  }
+  
+  .dashboard-stat-card > div:first-child {
+    font-size: 28px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .dashboard-stat-card > div:nth-child(2) {
+    font-size: 24px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .dashboard-stat-card > div:last-child {
+    font-size: 11px !important;
+  }
+  
+  .progress-circle-container {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .progress-percentage {
+    font-size: 24px;
+  }
+  
+  .progress-label {
+    font-size: 9px;
+  }
+  
+  .progress-count {
+    font-size: 11px;
+  }
+  
+  .stat-value {
+    font-size: 20px;
+  }
+  
+  .stat-label {
+    font-size: 10px;
+  }
+  
+  .quick-stat-card {
+    padding: 12px 10px;
+    gap: 12px;
+  }
+  
+  .stat-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+  
+  .today-habits-section {
+    padding: 12px 8px;
+  }
+  
+  .section-header-dashboard h2 {
+    font-size: 15px;
   }
 }

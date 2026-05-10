@@ -149,41 +149,43 @@ const HabitCard = ({ habit, serialNumber }) => {
           </div>
         </div>
 
-        <button 
-          className="habit-status-btn" 
-          onClick={handleToggleStatus}
-          title={isActive ? 'Pause habit' : 'Resume habit'}
-        >
-          {isActive ? <FaPause /> : <FaPlay />}
-        </button>
+        <div className="habit-actions">
+          <button 
+            className="habit-status-btn" 
+            onClick={handleToggleStatus}
+            title={isActive ? 'Pause habit' : 'Resume habit'}
+          >
+            {isActive ? <FaPause /> : <FaPlay />}
+          </button>
 
-        <button 
-          className="habit-view-btn" 
-          onClick={() => setShowDetailsModal(true)}
-          title="View Details"
-        >
-          <FaEye />
-        </button>
+          <button 
+            className="habit-view-btn" 
+            onClick={() => setShowDetailsModal(true)}
+            title="View Details"
+          >
+            <FaEye />
+          </button>
 
-        <button 
-          className="habit-schedule-btn" 
-          onClick={() => setShowScheduleModal(true)}
-          title="Schedule Reminder"
-        >
-          <FaBell />
-        </button>
+          <button 
+            className="habit-schedule-btn" 
+            onClick={() => setShowScheduleModal(true)}
+            title="Schedule Reminder"
+          >
+            <FaBell />
+          </button>
 
-        <button 
-          className="habit-calendar-btn" 
-          onClick={() => setShowCalendar(true)}
-          title="View Calendar"
-        >
-          <FaCalendar />
-        </button>
+          <button 
+            className="habit-calendar-btn" 
+            onClick={() => setShowCalendar(true)}
+            title="View Calendar"
+          >
+            <FaCalendar />
+          </button>
 
-        <button className="habit-delete" onClick={handleDelete}>
-          <FaTrash />
-        </button>
+          <button className="habit-delete" onClick={handleDelete}>
+            <FaTrash />
+          </button>
+        </div>
       </div>
 
       {showCalendar && (

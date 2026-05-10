@@ -125,3 +125,52 @@ code {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
+
+/* ============================================
+   RESPONSIVE DESIGN - Mobile First Approach
+   ============================================ */
+
+/* Base styles are mobile-first (320px+) */
+
+/* Small phones (up to 375px) */
+@media (max-width: 375px) {
+  body {
+    font-size: 13px;
+  }
+  
+  :root {
+    --radius-sm: 6px;
+    --radius: 8px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+  }
+}
+
+/* Tablets and small laptops (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Large screens (1440px+) */
+@media (min-width: 1440px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    font-size: 12px;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+  }
+}

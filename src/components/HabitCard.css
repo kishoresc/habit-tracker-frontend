@@ -9,6 +9,8 @@
   border: 2px solid var(--gray-200);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .habit-card::before {
@@ -107,6 +109,14 @@
 
 .habit-info {
   flex: 1;
+  min-width: 0;
+}
+
+.habit-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .habit-name {
@@ -442,17 +452,72 @@
 
 @media (max-width: 768px) {
   .habit-card {
-    padding: 12px;
+    padding: 14px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .habit-serial-number {
+    min-width: 28px;
+    height: 28px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  
+  .habit-checkbox {
+    flex-shrink: 0;
+  }
+  
+  .habit-info {
+    flex: 1;
+    min-width: 0;
+    width: calc(100% - 80px);
   }
 
   .habit-name {
     font-size: 14px;
+    margin-bottom: 6px;
   }
 
   .habit-meta {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
     gap: 6px;
+  }
+  
+  .habit-category {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+  
+  .habit-streak,
+  .habit-longest {
+    font-size: 12px;
+  }
+  
+  /* Actions row - full width below */
+  .habit-actions {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .habit-actions::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .habit-actions button {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+    flex-shrink: 0;
   }
 
   .calendar-modal-content {
@@ -461,15 +526,42 @@
   }
 
   .calendar-modal-header {
-    padding: 20px 24px;
+    padding: 18px 20px;
   }
 
   .calendar-modal-header h2 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .calendar-modal-body {
-    padding: 24px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .habit-card {
+    padding: 12px 10px;
+    gap: 8px;
+  }
+  
+  .habit-serial-number {
+    min-width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+  
+  .habit-name {
+    font-size: 13px;
+  }
+  
+  .habit-status-btn,
+  .habit-calendar-btn,
+  .habit-view-btn,
+  .habit-schedule-btn,
+  .habit-delete {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
   }
 }
 

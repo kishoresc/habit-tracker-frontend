@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .filter-label {
@@ -51,7 +52,8 @@
   font-weight: 500;
   color: var(--dark-text);
   transition: all 0.3s ease;
-  min-width: 180px;
+  min-width: 200px;
+  white-space: nowrap;
 }
 
 .filter-dropdown-btn:hover {
@@ -184,6 +186,7 @@
   display: grid;
   gap: 25px;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  width: 100%;
 }
 
 .chart-card {
@@ -191,6 +194,8 @@
   border-radius: 20px;
   padding: 25px;
   box-shadow: var(--shadow-lg);
+  min-width: 0;
+  width: 100%;
 }
 
 .chart-card.full-width {
@@ -244,6 +249,26 @@
   height: 250px;
   gap: 15px;
   padding: 20px 0;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+.bar-chart::-webkit-scrollbar {
+  height: 6px;
+}
+
+.bar-chart::-webkit-scrollbar-track {
+  background: var(--light-bg);
+  border-radius: 3px;
+}
+
+.bar-chart::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: 3px;
+}
+
+.bar-chart::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
 }
 
 .bar-item {
@@ -252,6 +277,8 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  min-width: 60px;
+  flex-shrink: 0;
 }
 
 .bar-container {
@@ -276,6 +303,11 @@
   font-weight: 600;
   color: var(--dark-text);
   font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .bar-value {
@@ -342,6 +374,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
 }
 
 .leaderboard-item {
@@ -352,6 +385,10 @@
   background: var(--light-bg);
   border-radius: 12px;
   transition: all 0.3s ease;
+  flex-wrap: nowrap;
+  overflow: visible;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .leaderboard-item:hover {
@@ -378,12 +415,16 @@
 
 .habit-details {
   flex: 1;
+  min-width: 0;
 }
 
 .habit-details h4 {
   margin: 0 0 5px 0;
   color: var(--dark-text);
   font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .habit-category {
@@ -398,6 +439,11 @@
   padding: 8px 15px;
   background: rgba(237, 137, 54, 0.1);
   border-radius: 20px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .streak-badge.gold {
@@ -463,47 +509,105 @@
 }
 
 @media (max-width: 768px) {
+  .analytics-content {
+    padding: 20px 16px;
+    margin-left: 0;
+  }
+
   .analytics-page {
-    padding: 15px;
+    padding: 0;
+  }
+  
+  .global-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 20px;
+    gap: 16px;
+  }
+  
+  .filter-label {
+    font-size: 16px;
+  }
+  
+  .filter-dropdown-btn {
+    width: 100%;
+    justify-content: space-between;
+    min-width: auto;
+  }
+  
+  .filter-dropdown-menu {
+    left: 0;
+    right: 0;
+    width: 100%;
   }
 
   .metrics-row {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 16px;
+    margin-bottom: 24px;
   }
 
   .metric-card {
-    padding: 20px;
+    padding: 18px;
   }
 
   .metric-icon {
     font-size: 36px;
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
   }
 
   .metric-content h3 {
     font-size: 24px;
   }
+  
+  .metric-content p {
+    font-size: 13px;
+  }
 
   .analytics-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+    width: 100%;
   }
 
   .chart-card {
-    padding: 20px 15px;
+    padding: 18px 16px;
+    width: 100%;
+    min-width: 0;
   }
 
   .card-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .card-header h3 {
+    font-size: 18px;
+  }
+  
+  .period-selector {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .period-selector button {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 13px;
   }
 
   .bar-chart {
     height: 200px;
     gap: 8px;
+    padding: 15px 0;
+    justify-content: flex-start;
+  }
+  
+  .bar-item {
+    min-width: 50px;
   }
 
   .bar-container {
@@ -511,7 +615,8 @@
   }
 
   .bar-label {
-    font-size: 12px;
+    font-size: 11px;
+    max-width: 50px;
   }
 
   .bar-value {
@@ -528,22 +633,262 @@
   }
 
   .rank-badge {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+  
+  .rank-badge.trophy {
+    font-size: 20px;
   }
 
   .habit-details h4 {
     font-size: 14px;
+  }
+  
+  .habit-category {
+    font-size: 11px;
   }
 
   .streak-badge {
     font-size: 14px;
     padding: 6px 12px;
   }
+  
+  .leaderboard-item {
+    padding: 12px;
+    gap: 10px;
+  }
+  
+  .leaderboard {
+    width: 100%;
+  }
+  
+  .category-item {
+    padding: 12px;
+  }
+  
+  /* Date Picker Mobile Styles */
+  .date-picker-overlay {
+    padding: 10px;
+    align-items: flex-start;
+    padding-top: 20px;
+    overflow: hidden;
+  }
+  
+  .date-picker-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px 12px;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0;
+  }
+  
+  .date-picker-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .date-picker-container::-webkit-scrollbar-track {
+    margin: 8px 0;
+  }
+  
+  .date-picker-header {
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .calendars-container::-webkit-scrollbar {
+    height: 6px;
+    margin-top: 8px;
+  }
+  
+  .calendars-container::-webkit-scrollbar-track {
+    background: var(--light-bg);
+    border-radius: 3px;
+  }
+  
+  .calendars-container::-webkit-scrollbar-thumb {
+    background: var(--gray-400);
+    border-radius: 3px;
+  }
+  
+  .calendar-month {
+    padding: 16px;
+  }
+  
+  .calendar-header {
+    margin-bottom: 12px;
+  }
+  
+  .calendar-grid {
+    gap: 3px;
+  }
+  
+  .calendar-day {
+    font-size: 13px;
+  }
+  
+  .day-header {
+    font-size: 11px;
+    padding: 6px 0;
+  }
+  
+  .date-picker-footer {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  
+  .cancel-btn, .apply-btn {
+    width: 100%;
+  }
+  
+  .selected-range-display {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+  
+  .range-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .analytics-content {
+    padding: 16px 12px;
+  }
+  
+  .global-filter-bar {
+    padding: 14px 16px;
+  }
+  
+  .filter-label {
+    font-size: 15px;
+  }
+  
+  .filter-label .filter-icon {
+    font-size: 20px;
+  }
+  
+  .filter-dropdown-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .metric-card {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .metric-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 32px;
+  }
+  
+  .metric-content h3 {
+    font-size: 22px;
+  }
+  
+  .chart-card {
+    padding: 16px 12px;
+    width: 100%;
+    min-width: 0;
+  }
+  
+  .bar-chart {
+    height: 180px;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+  
+  .bar-item {
+    min-width: 45px;
+  }
+
+  .bar-container {
+    height: 130px;
+  }
+  
+  .bar-label {
+    font-size: 10px;
+    max-width: 45px;
+  }
+  
+  .date-picker-container {
+    padding: 12px 8px;
+    max-height: 80vh;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  .date-picker-container::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .date-picker-container::-webkit-scrollbar-track {
+    margin: 6px 0;
+  }
+  
+  .calendar-month {
+    padding: 12px 8px;
+  }
+  
+  .calendar-day {
+    font-size: 12px;
+  }
+  
+  .day-header {
+    font-size: 10px;
+  }
+  
+  .month-name {
+    font-size: 15px;
+  }
+  
+  /* Leaderboard items for small mobile */
+  .leaderboard-item {
+    padding: 10px;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  
+  .rank-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+  
+  .rank-badge.trophy {
+    font-size: 18px;
+  }
+  
+  .habit-details {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .habit-details h4 {
+    font-size: 13px;
+  }
+  
+  .habit-category {
+    font-size: 10px;
+  }
+  
+  .streak-badge {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
+  .analytics-content {
+    padding: 28px 24px;
+  }
+  
   .analytics-grid {
     grid-template-columns: 1fr;
   }
@@ -551,8 +896,12 @@
   .metrics-row {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .calendars-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
 }
-
 
 /* Date Picker Styles */
 .date-picker-overlay {
@@ -567,6 +916,8 @@
   justify-content: center;
   z-index: 2000;
   animation: fadeIn 0.2s ease;
+  padding: 20px;
+  overflow: hidden;
 }
 
 @keyframes fadeIn {
@@ -579,9 +930,34 @@
   border-radius: 20px;
   padding: 25px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  max-width: 800px;
-  width: 90%;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   animation: slideUp 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.date-picker-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.date-picker-container::-webkit-scrollbar-track {
+  background: var(--light-bg);
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.date-picker-container::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: 4px;
+}
+
+.date-picker-container::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
 }
 
 @keyframes slideUp {
@@ -663,10 +1039,29 @@
   margin-bottom: 20px;
 }
 
+@media (max-width: 768px) {
+  .calendars-container {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+  }
+}
+
 .calendar-month {
   background: var(--light-bg);
   border-radius: 15px;
   padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .calendar-month {
+    min-width: 100%;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
 }
 
 .calendar-header {
@@ -798,16 +1193,4 @@
 .apply-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .calendars-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .date-picker-container {
-    width: 95%;
-    padding: 20px;
-  }
 }
