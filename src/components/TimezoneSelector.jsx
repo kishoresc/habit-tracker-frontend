@@ -6,6 +6,7 @@ const TimezoneSelector = ({ value, onChange, required = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [timezones, setTimezones] = useState([]);
+  const [openUpward, setOpenUpward] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -37,6 +38,18 @@ const TimezoneSelector = ({ value, onChange, required = false }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    // Check if dropdown should open upward
+    if (isOpen && dropdownRef.current) {
+      const rect = dropdownRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      
+      // If not enough space below (less than 300px) and more space above, open upward
+      setOpenUpward(spaceBelow < 300 && spaceAbove > spaceBelow);
+    }
+  }, [isOpen]);
+
   const filteredTimezones = timezones.filter(tz =>
     tz.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -63,7 +76,7 @@ const TimezoneSelector = ({ value, onChange, required = false }) => {
       </div>
 
       {isOpen && (
-        <div className="timezone-dropdown">
+        <div className={`timezone-dropdown ${openUpward ? 'open-upward' : ''}`}>
           <div className="timezone-search">
             <input
               type="text"
