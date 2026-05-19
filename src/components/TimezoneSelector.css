@@ -58,11 +58,12 @@
   border: 2px solid var(--border-color);
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  max-height: 400px;
+  z-index: 9999;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   animation: dropdownSlideIn 0.2s ease;
+  overflow: hidden;
 }
 
 @keyframes dropdownSlideIn {
@@ -79,6 +80,7 @@
 .timezone-search {
   padding: 12px;
   border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .timezone-search input {
@@ -98,7 +100,8 @@
 
 .timezone-list {
   overflow-y: auto;
-  max-height: 320px;
+  flex: 1;
+  min-height: 0;
 }
 
 .timezone-option {
@@ -107,7 +110,7 @@
   font-size: 14px;
   color: var(--dark-text);
   transition: all 0.2s ease;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .timezone-option:last-child {
@@ -134,19 +137,31 @@
 
 /* Scrollbar styling */
 .timezone-list::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .timezone-list::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 0 12px 12px 0;
 }
 
 .timezone-list::-webkit-scrollbar-thumb {
   background: var(--primary-color);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .timezone-list::-webkit-scrollbar-thumb:hover {
   background: var(--primary-hover);
+}
+
+/* Ensure dropdown stays within viewport */
+@media (max-height: 700px) {
+  .timezone-dropdown {
+    max-height: 250px;
+  }
+}
+
+@media (max-height: 600px) {
+  .timezone-dropdown {
+    max-height: 200px;
+  }
 }
