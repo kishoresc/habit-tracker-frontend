@@ -222,3 +222,74 @@
     font-size: 14px;
   }
 }
+
+
+/* Timezone editing styles */
+.timezone-select {
+  padding: 8px 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--dark-text);
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.timezone-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.btn-edit-timezone {
+  padding: 8px 16px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit-timezone:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.timezone-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-save-timezone,
+.btn-cancel-timezone {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-save-timezone {
+  background: var(--success-color);
+  color: white;
+}
+
+.btn-save-timezone:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+}
+
+.btn-cancel-timezone {
+  background: var(--gray-light);
+  color: var(--dark-text);
+}
+
+.btn-cancel-timezone:hover {
+  background: #d0d0d0;
+  transform: translateY(-2px);
+}
