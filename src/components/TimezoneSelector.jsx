@@ -1,35 +1,35 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment-timezone';
-import { FaSearch, FaTimes } from 'react-icons/fa';
 import './TimezoneSelector.css';
 
-const TimezoneSelector = ({ value, onChange, disabled }) => {
+const TimezoneSelector = ({ value, onChange, required = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredTimezones, setFilteredTimezones] = useState([]);
+  const [timezones, setTimezones] = useState([]);
   const dropdownRef = useRef(null);
 
-  // Get all timezones (memoized to avoid recreating on every render)
-  const allTimezones = useMemo(() => moment.tz.names(), []);
-
   useEffect(() => {
-    // Filter timezones based on search term
-    if (searchTerm) {
-      const filtered = allTimezones.filter(tz =>
-        tz.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredTimezones(filtered);
-    } else {
-      setFilteredTimezones(allTimezones);
-    }
-  }, [searchTerm, allTimezones]);
+    // Get all timezone names
+    const tzNames = moment.tz.names();
+    
+    // Create timezone list with UTC offsets
+    const tzList = tzNames.map(tz => {
+      const offset = moment.tz(tz).format('Z');
+      return {
+        value: tz,
+        label: `${tz} (UTC${offset})`,
+        offset: offset
+      };
+    });
+
+    setTimezones(tzList);
+  }, []);
 
   useEffect(() => {
     // Close dropdown when clicking outside
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
-        setSearchTerm('');
       }
     };
 
@@ -37,67 +37,57 @@ const TimezoneSelector = ({ value, onChange, disabled }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const filteredTimezones = timezones.filter(tz =>
+    tz.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const selectedTimezone = timezones.find(tz => tz.value === value);
+
   const handleSelect = (timezone) => {
-    onChange(timezone);
+    onChange(timezone.value);
     setIsOpen(false);
     setSearchTerm('');
   };
 
-  const handleClearSearch = () => {
-    setSearchTerm('');
-  };
-
-  const getTimezoneDisplay = (tz) => {
-    const offset = moment.tz(tz).format('Z');
-    return `${tz} (UTC${offset})`;
-  };
-
   return (
     <div className="timezone-selector" ref={dropdownRef}>
-      <div
-        className={`timezone-selector-input ${isOpen ? 'open' : ''} ${disabled ? 'disabled' : ''}`}
-        onClick={() => !disabled && setIsOpen(!isOpen)}
+      <div 
+        className="timezone-selector-input"
+        onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="timezone-value">
-          {value ? getTimezoneDisplay(value) : 'Select timezone'}
-        </span>
-        <span className="timezone-arrow">▼</span>
+        <div className="timezone-icon">🌍</div>
+        <div className="timezone-value">
+          {selectedTimezone ? selectedTimezone.label : 'Select timezone...'}
+        </div>
+        <div className={`timezone-arrow ${isOpen ? 'open' : ''}`}>▼</div>
       </div>
 
       {isOpen && (
         <div className="timezone-dropdown">
-          <div className="timezone-search-wrapper">
-            <FaSearch className="search-icon" />
+          <div className="timezone-search">
             <input
               type="text"
-              className="timezone-search"
               placeholder="Search timezone..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
               autoFocus
             />
-            {searchTerm && (
-              <button className="clear-search-btn" onClick={handleClearSearch}>
-                <FaTimes />
-              </button>
-            )}
           </div>
 
           <div className="timezone-list">
             {filteredTimezones.length > 0 ? (
               filteredTimezones.map((tz) => (
                 <div
-                  key={tz}
-                  className={`timezone-option ${value === tz ? 'selected' : ''}`}
+                  key={tz.value}
+                  className={`timezone-option ${tz.value === value ? 'selected' : ''}`}
                   onClick={() => handleSelect(tz)}
                 >
-                  {getTimezoneDisplay(tz)}
+                  {tz.label}
                 </div>
               ))
             ) : (
-              <div className="timezone-no-results">
-                No timezones found for "{searchTerm}"
-              </div>
+              <div className="timezone-no-results">No timezones found</div>
             )}
           </div>
         </div>

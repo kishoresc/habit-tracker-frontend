@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import TopBar from '../components/TopBar';
+import TimezoneSelector from '../components/TimezoneSelector';
 import { FaBell, FaUser, FaEnvelope, FaCalendar } from 'react-icons/fa';
 import moment from 'moment-timezone';
 import './Profile.css';
@@ -120,30 +121,15 @@ const Profile = ({ toggleSidebar, sidebarOpen }) => {
             <div className="setting-item">
               <div className="setting-info">
                 <div className="setting-icon">🌍</div>
-                <div>
+                <div style={{ flex: 1 }}>
                   <h4>Timezone</h4>
                   {!isEditingTimezone ? (
-                    <p>{user?.timezone || 'UTC'}</p>
+                    <p>{user?.timezone ? `${user.timezone} (UTC${moment.tz(user.timezone).format('Z')})` : 'UTC'}</p>
                   ) : (
-                    <select
+                    <TimezoneSelector
                       value={timezone}
-                      onChange={(e) => setTimezone(e.target.value)}
-                      className="timezone-select"
-                    >
-                      <option value="Asia/Kolkata">India (IST - Asia/Kolkata)</option>
-                      <option value="America/New_York">US Eastern (EST/EDT)</option>
-                      <option value="America/Chicago">US Central (CST/CDT)</option>
-                      <option value="America/Denver">US Mountain (MST/MDT)</option>
-                      <option value="America/Los_Angeles">US Pacific (PST/PDT)</option>
-                      <option value="Europe/London">UK (GMT/BST)</option>
-                      <option value="Europe/Paris">Central Europe (CET/CEST)</option>
-                      <option value="Asia/Dubai">UAE (GST)</option>
-                      <option value="Asia/Tokyo">Japan (JST)</option>
-                      <option value="Asia/Shanghai">China (CST)</option>
-                      <option value="Asia/Singapore">Singapore (SGT)</option>
-                      <option value="Australia/Sydney">Australia Eastern (AEST/AEDT)</option>
-                      <option value="UTC">UTC (Universal Time)</option>
-                    </select>
+                      onChange={(tz) => setTimezone(tz)}
+                    />
                   )}
                 </div>
               </div>

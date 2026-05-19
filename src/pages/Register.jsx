@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import moment from 'moment-timezone';
+import TimezoneSelector from '../components/TimezoneSelector';
 import './Auth.css';
 
 const Register = () => {
@@ -241,28 +242,11 @@ const Register = () => {
 
           <div className="form-group">
             <label htmlFor="timezone">Timezone</label>
-            <select
-              id="timezone"
-              name="timezone"
+            <TimezoneSelector
               value={formData.timezone}
-              onChange={handleChange}
-              className="form-select"
+              onChange={(tz) => setFormData({ ...formData, timezone: tz })}
               required
-            >
-              <option value="Asia/Kolkata">India (IST - Asia/Kolkata)</option>
-              <option value="America/New_York">US Eastern (EST/EDT)</option>
-              <option value="America/Chicago">US Central (CST/CDT)</option>
-              <option value="America/Denver">US Mountain (MST/MDT)</option>
-              <option value="America/Los_Angeles">US Pacific (PST/PDT)</option>
-              <option value="Europe/London">UK (GMT/BST)</option>
-              <option value="Europe/Paris">Central Europe (CET/CEST)</option>
-              <option value="Asia/Dubai">UAE (GST)</option>
-              <option value="Asia/Tokyo">Japan (JST)</option>
-              <option value="Asia/Shanghai">China (CST)</option>
-              <option value="Asia/Singapore">Singapore (SGT)</option>
-              <option value="Australia/Sydney">Australia Eastern (AEST/AEDT)</option>
-              <option value="UTC">UTC (Universal Time)</option>
-            </select>
+            />
             <small className="form-text">Your timezone is auto-detected. Change if needed.</small>
           </div>
 
