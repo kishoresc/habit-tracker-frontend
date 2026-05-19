@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
+import moment from 'moment-timezone';
 import './Auth.css';
 
 const Register = () => {
@@ -10,7 +11,7 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Auto-detect timezone
+    timezone: moment.tz.guess(), // Auto-detect timezone using moment-timezone
   });
 
   const [errors, setErrors] = useState({
